@@ -1,4 +1,4 @@
-package com.adkozlovskiy.weather_compose.presentation.ui.theme
+package com.adkozlovskiy.weather_compose.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

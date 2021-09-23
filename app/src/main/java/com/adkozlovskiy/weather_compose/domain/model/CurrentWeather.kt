@@ -12,4 +12,5 @@ data class CurrentWeather(
     val humidity: String,
     val wind: String,
     val pressure: String,
+    val location: String,
 )

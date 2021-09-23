@@ -18,6 +18,8 @@ data class CurrentWeatherResponse(
     val dt: Long,
     @SerializedName("sys")
     val sysResponse: SysResponse,
+    @SerializedName("name")
+    val name: String,
 ) {
     fun toCurrentWeather(mapper: CurrentWeatherMapper, scale: TemperatureScale): CurrentWeather {
         return mapper.map(this, scale)

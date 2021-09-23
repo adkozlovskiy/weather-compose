@@ -26,6 +26,7 @@ class CurrentWeatherMapperImpl @Inject constructor(
         pressure = "${weather.mainResponse.pressure}hPa",
         humidity = "${weather.mainResponse.humidity}%",
         clouds = "${weather.cloudsResponse.all}%",
-        wind = windConverter.toString(weather.windResponse.deg, weather.windResponse.speed)
+        wind = windConverter.toString(weather.windResponse.deg, weather.windResponse.speed),
+        location = weather.name,
     )
 }

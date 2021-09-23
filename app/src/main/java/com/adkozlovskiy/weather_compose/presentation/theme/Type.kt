@@ -1,4 +1,4 @@
-package com.adkozlovskiy.weather_compose.presentation.ui.theme
+package com.adkozlovskiy.weather_compose.presentation.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

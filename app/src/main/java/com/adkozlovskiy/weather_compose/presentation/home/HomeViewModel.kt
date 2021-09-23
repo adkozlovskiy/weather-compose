@@ -1,4 +1,4 @@
-package com.adkozlovskiy.weather_compose.presentation
+package com.adkozlovskiy.weather_compose.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -48,9 +48,4 @@ sealed class CurrentWeatherState {
     object Loading : CurrentWeatherState()
     class Success(val data: CurrentWeather) : CurrentWeatherState()
     class Failure(val failureInfo: FailureInfo) : CurrentWeatherState()
-
-    fun isLoading(): Boolean = this is Loading
-    fun isSuccess(): Boolean = this is Success
-    fun isFailure(): Boolean = this is Failure
-
 }

@@ -8,7 +8,7 @@ sealed class Resource<out R> {
     companion object
 }
 
-sealed class FailureInfo (open val e: Exception) {
+sealed class FailureInfo(open val e: Exception) {
     class HttpException(override val e: Exception) : FailureInfo(e)
     class IOException(override val e: Exception) : FailureInfo(e)
     class Unresolved(override val e: Exception) : FailureInfo(e)
