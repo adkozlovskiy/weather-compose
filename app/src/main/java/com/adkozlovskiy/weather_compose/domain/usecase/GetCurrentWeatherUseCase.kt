@@ -18,7 +18,7 @@ class GetCurrentWeatherUseCase @Inject constructor(
     private val mapper: CurrentWeatherMapper,
 ) {
 
-    operator fun invoke(location: Location): Flow<Resource<CurrentWeather>> = flow {
+    suspend operator fun invoke(location: Location): Flow<Resource<CurrentWeather>> = flow {
         try {
             emit(Resource.Loading)
             val currentWeather =

@@ -1,12 +1,13 @@
 package com.adkozlovskiy.weather_compose.domain.model
 
-import android.graphics.drawable.Drawable
+import androidx.annotation.DrawableRes
 
 data class CurrentWeather(
     val title: String,
     val temp: String,
     val feelsLike: String,
-    val icon: Drawable,
+    @DrawableRes
+    val iconId: Int,
     val clouds: String,
     val humidity: String,
     val wind: String,

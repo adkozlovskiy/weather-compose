@@ -1,7 +1,6 @@
 package com.adkozlovskiy.weather_compose.util
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import com.adkozlovskiy.weather_compose.R
 import com.adkozlovskiy.weather_compose.util.TemperatureScale.*
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -9,14 +8,12 @@ import javax.inject.Inject
 import kotlin.math.round
 
 interface IconResolver {
-    fun resolve(icon: String): Drawable
+    fun resolve(icon: String): Int
 }
 
-class IconResolverImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
-) : IconResolver {
-    override fun resolve(icon: String): Drawable {
-        val iconResourceId = when (icon) {
+class IconResolverImpl @Inject constructor() : IconResolver {
+    override fun resolve(icon: String): Int {
+        return when (icon) {
             "01d" -> R.drawable.d1
             "02d" -> R.drawable.d2
             "03d" -> R.drawable.d3
@@ -38,8 +35,6 @@ class IconResolverImpl @Inject constructor(
             "50n" -> R.drawable.n50
             else -> throw IllegalArgumentException(" incorrect icon")
         }
-
-        return context.getDrawableCompat(iconResourceId)
     }
 }
 

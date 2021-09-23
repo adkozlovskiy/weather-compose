@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android projects/weathercompose/app/src/main/res/drawable/ic_location.xml" value="0.346875" />
         <entry key="..\:/Android projects/weathercompose/app/src/main/res/drawable/ic_settings.xml" value="0.5615384615384615" />
       </map>
     </option>

@@ -1,6 +1,5 @@
 package com.adkozlovskiy.weather_compose.presentation
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adkozlovskiy.weather_compose.common.FailureInfo
@@ -12,14 +11,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.plus
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
 ) : ViewModel() {
 
@@ -30,8 +27,8 @@ class MainViewModel @Inject constructor(
         loadCurrentWeatherInfo(Location(45.0, 11.3))
     }
 
-    private fun loadCurrentWeatherInfo(location: Location) {
-        getCurrentWeatherUseCase(location).onEach { resource ->
+    private fun loadCurrentWeatherInfo(location: Location) = viewModelScope.launch(Dispatchers.IO) {
+        getCurrentWeatherUseCase(location).collect { resource ->
             when (resource) {
                 is Resource.Success -> {
                     _weatherState.value = CurrentWeatherState.Success(resource.data)
@@ -43,7 +40,7 @@ class MainViewModel @Inject constructor(
                     _weatherState.value = CurrentWeatherState.Loading
                 }
             }
-        }.launchIn(viewModelScope + Dispatchers.IO)
+        }
     }
 }
 

@@ -22,7 +22,7 @@ class CurrentWeatherMapperImpl @Inject constructor(
         title = weather.weatherResponse[0].main,
         temp = tempConverter.fromKelvins(weather.mainResponse.temp, scale),
         feelsLike = tempConverter.fromKelvins(weather.mainResponse.feelsLike, scale),
-        icon = iconResolver.resolve(weather.weatherResponse[0].icon),
+        iconId = iconResolver.resolve(weather.weatherResponse[0].icon),
         pressure = "${weather.mainResponse.pressure}hPa",
         humidity = "${weather.mainResponse.humidity}%",
         clouds = "${weather.cloudsResponse.all}%",
