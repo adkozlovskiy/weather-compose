@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">weather-compose</string>
+    <string name="app_name">Weather Compose</string>
     <string name="wind_n">N</string>
     <string name="wind_ne">NE</string>
     <string name="wind_e">E</string>
