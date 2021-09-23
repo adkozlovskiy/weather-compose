@@ -8,4 +8,9 @@
     <string name="wind_sw">SW</string>
     <string name="wind_w">W</string>
     <string name="wind_nw">NW</string>
+    <string name="feels_like">Feels like</string>
+    <string name="clouds">Clouds</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind">Wind</string>
 </resources>

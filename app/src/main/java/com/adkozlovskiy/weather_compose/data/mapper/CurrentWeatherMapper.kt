@@ -19,7 +19,7 @@ class CurrentWeatherMapperImpl @Inject constructor(
 ) : CurrentWeatherMapper {
 
     override fun map(weather: CurrentWeatherResponse, scale: TemperatureScale) = CurrentWeather(
-        title = weather.weatherResponse[0].main,
+        title = weather.weatherResponse[0].description.replaceFirstChar { it.uppercaseChar() },
         temp = tempConverter.fromKelvins(weather.mainResponse.temp, scale),
         feelsLike = tempConverter.fromKelvins(weather.mainResponse.feelsLike, scale),
         iconId = iconResolver.resolve(weather.weatherResponse[0].icon),
@@ -27,6 +27,6 @@ class CurrentWeatherMapperImpl @Inject constructor(
         humidity = "${weather.mainResponse.humidity}%",
         clouds = "${weather.cloudsResponse.all}%",
         wind = windConverter.toString(weather.windResponse.deg, weather.windResponse.speed),
-        location = weather.name,
+        location = weather.name
     )
 }

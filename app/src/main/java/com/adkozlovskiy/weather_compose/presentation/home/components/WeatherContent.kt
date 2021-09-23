@@ -21,18 +21,16 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.adkozlovskiy.weather_compose.R
 import com.adkozlovskiy.weather_compose.domain.model.CurrentWeather
-import com.adkozlovskiy.weather_compose.presentation.theme.BackgroundDark
-import com.adkozlovskiy.weather_compose.presentation.theme.BackgroundLight
-import com.adkozlovskiy.weather_compose.presentation.theme.OnCardTextPrimary
-import com.adkozlovskiy.weather_compose.presentation.theme.OnCardTextSecondary
+import com.adkozlovskiy.weather_compose.presentation.theme.*
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun WeatherContent(currentWeather: CurrentWeather) {
-    val gradient = Brush.verticalGradient(listOf(BackgroundDark, BackgroundLight))
+    val gradient = Brush.horizontalGradient(listOf(BackgroundDark, BackgroundLight))
     Box(
         modifier = Modifier.background(gradient)
     ) {
@@ -76,7 +74,7 @@ fun LocationToolbar(location: String) {
                 .padding(end = 6.dp),
             text = location,
             color = Color.White,
-            style = MaterialTheme.typography.body1
+            style = Typography.body1
         )
         Image(
             modifier = Modifier
@@ -100,11 +98,11 @@ fun WeatherHeader(data: CurrentWeather) {
             Text(
                 text = data.temp,
                 color = Color.White,
-                style = MaterialTheme.typography.h2,
+                style = Typography.h1,
                 modifier = Modifier.padding(end = 12.dp)
             )
             Image(
-                modifier = Modifier.size(64.dp),
+                modifier = Modifier.size(76.dp),
                 painter = painterResource(id = data.iconId),
                 contentDescription = "",
             )
@@ -118,7 +116,7 @@ fun WeatherHeader(data: CurrentWeather) {
             color = Color.White
         )
         Text(
-            text = "Feels like: ${data.feelsLike}",
+            text = "${stringResource(id = R.string.feels_like)} ${data.feelsLike}",
             style = MaterialTheme.typography.body1,
             color = Color.White,
         )
@@ -130,13 +128,13 @@ fun WeatherHeader(data: CurrentWeather) {
 fun SunriseSunsetContent(sunrise: Long, sunset: Long, current: Long) {
     Canvas(modifier = Modifier
         .fillMaxWidth()
-        .padding(bottom = 80.dp), onDraw = {
+        .padding(bottom = 112.dp), onDraw = {
         drawArc(
             OnCardTextSecondary,
             -9.5f,
             -160f,
             false,
-            size = Size(size.width, 360f),
+            size = Size(size.width, 460f),
             style = Stroke(width = 2.dp.toPx())
         )
     })
@@ -151,17 +149,16 @@ fun WeatherDetails(weather: CurrentWeather) {
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Column {
-            WeatherDetailsItem(title = "Облачность", description = weather.clouds)
-            WeatherDetailsItem(title = "Влажность", description = weather.humidity)
+            WeatherDetailsItem(title = stringResource(id = R.string.clouds), description = weather.clouds)
+            WeatherDetailsItem(title = stringResource(id = R.string.pressure), description = weather.pressure)
         }
 
         Column {
-            WeatherDetailsItem(title = "Давление", description = weather.pressure)
-            WeatherDetailsItem(title = "Ветер", description = weather.wind)
+            WeatherDetailsItem(title = stringResource(id = R.string.humidity), description = weather.humidity)
+            WeatherDetailsItem(title = stringResource(id = R.string.wind), description = weather.wind)
         }
     }
 }
-
 
 @Composable
 fun DetailedWeather(weather: CurrentWeather) {
@@ -183,7 +180,6 @@ fun DetailedWeather(weather: CurrentWeather) {
     }
 }
 
-
 @Composable
 fun WeatherDetailsItem(title: String, description: String) {
     Column(
@@ -192,12 +188,12 @@ fun WeatherDetailsItem(title: String, description: String) {
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.body2,
+            style = Typography.body2,
             color = OnCardTextSecondary,
         )
         Text(
             text = description,
-            style = MaterialTheme.typography.h6,
+            style = Typography.h6,
             color = OnCardTextPrimary,
         )
     }
