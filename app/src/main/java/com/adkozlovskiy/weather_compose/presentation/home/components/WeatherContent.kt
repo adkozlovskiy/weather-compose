@@ -27,7 +27,7 @@ import com.adkozlovskiy.weather_compose.presentation.theme.*
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun WeatherContent(currentWeather: CurrentWeather) {
-    val gradient = Brush.horizontalGradient(listOf(BackgroundDark, BackgroundLight))
+    val gradient = Brush.verticalGradient(listOf(BackgroundDark, BackgroundLight))
     Box(
         modifier = Modifier.background(gradient)
     ) {
@@ -62,7 +62,7 @@ fun LocationToolbar(location: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 56.dp),
+            .padding(top = 24.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {

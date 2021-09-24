@@ -1,7 +1,9 @@
 package com.adkozlovskiy.weather_compose.presentation.home
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.adkozlovskiy.weather_compose.R
@@ -10,12 +12,19 @@ import com.adkozlovskiy.weather_compose.presentation.home.components.FailureCont
 import com.adkozlovskiy.weather_compose.presentation.home.components.LoadingContent
 import com.adkozlovskiy.weather_compose.presentation.home.components.RequiresPermissions
 import com.adkozlovskiy.weather_compose.presentation.home.components.WeatherContent
+import com.adkozlovskiy.weather_compose.presentation.theme.BackgroundDark
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun HomeScreen(
     viewModel: MainViewModel = viewModel()
 ) {
     val weatherState = viewModel.weatherState.collectAsState()
+    val systemUiController = rememberSystemUiController()
+    SideEffect {
+        systemUiController.setStatusBarColor(BackgroundDark)
+        systemUiController.setNavigationBarColor(Color.White)
+    }
 
     when (val state = weatherState.value) {
         is WeatherState.Loading -> LoadingContent()
