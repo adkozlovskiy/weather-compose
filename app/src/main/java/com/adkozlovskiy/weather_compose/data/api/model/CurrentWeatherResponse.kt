@@ -1,8 +1,8 @@
 package com.adkozlovskiy.weather_compose.data.api.model
 
 import com.adkozlovskiy.weather_compose.data.mapper.CurrentWeatherMapper
+import com.adkozlovskiy.weather_compose.data.mapper.components.Scales
 import com.adkozlovskiy.weather_compose.domain.model.CurrentWeather
-import com.adkozlovskiy.weather_compose.util.TemperatureScale
 import com.google.gson.annotations.SerializedName
 
 data class CurrentWeatherResponse(
@@ -21,8 +21,8 @@ data class CurrentWeatherResponse(
     @SerializedName("name")
     val name: String,
 ) {
-    fun toCurrentWeather(mapper: CurrentWeatherMapper, scale: TemperatureScale): CurrentWeather {
-        return mapper.map(this, scale)
+    fun toCurrentWeather(mapper: CurrentWeatherMapper, scales: Scales): CurrentWeather {
+        return mapper.map(this, scales)
     }
 }
 

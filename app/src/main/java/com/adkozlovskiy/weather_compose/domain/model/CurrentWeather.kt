@@ -3,7 +3,7 @@ package com.adkozlovskiy.weather_compose.domain.model
 import androidx.annotation.DrawableRes
 
 data class CurrentWeather(
-    val title: String,
+    val description: String,
     val temp: String,
     val feelsLike: String,
     @DrawableRes

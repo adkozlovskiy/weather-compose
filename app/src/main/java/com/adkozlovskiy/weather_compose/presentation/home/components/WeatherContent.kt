@@ -111,7 +111,7 @@ fun WeatherHeader(data: CurrentWeather) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = data.title,
+            text = data.description,
             style = MaterialTheme.typography.body1,
             color = Color.White
         )
