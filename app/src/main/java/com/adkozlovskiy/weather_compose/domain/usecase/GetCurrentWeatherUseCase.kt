@@ -22,19 +22,18 @@ class GetCurrentWeatherUseCase @Inject constructor(
 
     operator fun invoke(location: Location): Flow<Resource<CurrentWeather>> = flow {
         try {
-            emit(Resource.Loading)
             val currentWeather =
                 weatherRepository.getCurrentWeather(location.latitude, location.longitude)
                     .toCurrentWeather(mapper, Scales(TemperatureScale.CELSIUS, PressureScale.HPA))
             emit(Resource.Success(currentWeather))
         } catch (e: HttpException) {
-            emit(Resource.Failure(FailureInfo.HttpException(e)))
+            emit(Resource.Failure(FailureInfo.HttpException))
 
         } catch (e: IOException) {
-            emit(Resource.Failure(FailureInfo.IOException(e)))
+            emit(Resource.Failure(FailureInfo.IOException))
 
         } catch (e: Exception) {
-            emit(Resource.Failure(FailureInfo.Unresolved(e)))
+            emit(Resource.Failure(FailureInfo.Unresolved))
         }
     }
 }

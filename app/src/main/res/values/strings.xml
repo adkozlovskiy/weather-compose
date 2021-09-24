@@ -15,4 +15,19 @@
     <string name="wind">Wind</string>
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
+    <string name="unresolved_error">Something went wrong</string>
+    <string name="unresolved_error_desc">We could not determine what the reason was. Try to repeat your request.</string>
+    <string name="internet_error">Internet unavailable</string>
+    <string name="internet_error_desc">Check if you are connected to the network.</string>
+    <string name="server_error">Oops, we seem to be broken</string>
+    <string name="server_error_desc">An error has occurred on the server. Please try again later.</string>
+    <string name="geolocation_error">We don\'t know where you are</string>
+    <string name="geolocation_error_desc">Something went wrong while trying to determine your location. Check your geolocation settings.</string>
+    <string name="retry">Retry</string>
+    <string name="no_permission_desc">We do not have permission to receive geolocation.</string>
+    <string name="no_permission">Geolocation is not available.</string>
+    <string name="rationale_title">Allow geolocation access</string>
+    <string name="rationale_text">We need location access to determine your location and give an accurate weather forecast.</string>
+    <string name="perm_denied_text">You have denied access to a location. The application will not function correctly without this setting. Go to settings.</string>
+    <string name="perm_denied_title">We don\'t know where you are.</string>
 </resources>

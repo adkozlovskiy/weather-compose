@@ -8,6 +8,7 @@ import com.adkozlovskiy.weather_compose.R
 import com.adkozlovskiy.weather_compose.domain.model.CurrentWeather
 import com.adkozlovskiy.weather_compose.presentation.home.components.FailureContent
 import com.adkozlovskiy.weather_compose.presentation.home.components.LoadingContent
+import com.adkozlovskiy.weather_compose.presentation.home.components.RequiresPermissions
 import com.adkozlovskiy.weather_compose.presentation.home.components.WeatherContent
 
 @Composable
@@ -17,9 +18,18 @@ fun HomeScreen(
     val weatherState = viewModel.weatherState.collectAsState()
 
     when (val state = weatherState.value) {
-        is CurrentWeatherState.Success -> WeatherContent(currentWeather = state.data)
-        is CurrentWeatherState.Failure -> FailureContent(failureInfo = state.failureInfo)
-        is CurrentWeatherState.Loading -> LoadingContent()
+        is WeatherState.Loading -> LoadingContent()
+        is WeatherState.NoLocationPermission -> RequiresPermissions(
+            onPermissionsGranted = {
+                viewModel.getCurrentWeatherInfo()
+            }
+        )
+        is WeatherState.Success -> WeatherContent(currentWeather = state.data)
+        is WeatherState.Failure -> FailureContent(failureInfo = state.failureInfo,
+            onRetry = {
+                viewModel.getCurrentWeatherInfo()
+            }
+        )
     }
 }
 
