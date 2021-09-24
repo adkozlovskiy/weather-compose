@@ -36,7 +36,7 @@ fun WeatherContentPreview() {
             "47%",
             "1.37m/s, S",
             "1019hPa",
-            "Sermide"
+            "Sermide", "23:00", "25:00"
         )
     )
 }

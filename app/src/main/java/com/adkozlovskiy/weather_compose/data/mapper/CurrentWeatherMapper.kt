@@ -3,6 +3,8 @@ package com.adkozlovskiy.weather_compose.data.mapper
 import com.adkozlovskiy.weather_compose.data.api.model.CurrentWeatherResponse
 import com.adkozlovskiy.weather_compose.data.mapper.components.*
 import com.adkozlovskiy.weather_compose.domain.model.CurrentWeather
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 interface CurrentWeatherMapper {
@@ -13,6 +15,7 @@ class CurrentWeatherMapperImpl @Inject constructor(
     private val iconResolver: IconConverter,
     private val tempConverter: TemperatureConverter,
     private val windConverter: WindConverter,
+    private val timeFormat: SimpleDateFormat,
 ) : CurrentWeatherMapper {
 
     override fun map(weather: CurrentWeatherResponse, scales: Scales) = CurrentWeather(
@@ -24,7 +27,9 @@ class CurrentWeatherMapperImpl @Inject constructor(
         humidity = getHumidityPercent(weather.mainResponse.humidity),
         clouds = getCloudsPercent(weather.cloudsResponse.all),
         wind = getConverterWind(weather.windResponse.deg, weather.windResponse.speed),
-        location = weather.name
+        location = weather.name,
+        sunrise = getTimeFormatted(weather.sysResponse.sunrise),
+        sunset = getTimeFormatted(weather.sysResponse.sunset)
     )
 
     private fun getTitledDescription(desc: String): String {
@@ -53,5 +58,10 @@ class CurrentWeatherMapperImpl @Inject constructor(
 
     private fun getConverterWind(deg: Int, speed: Double): String {
         return windConverter.toWindString(deg, speed)
+    }
+
+    private fun getTimeFormatted(millis: Long): String {
+        val date = Date(millis * 1000)
+        return timeFormat.format(date)
     }
 }

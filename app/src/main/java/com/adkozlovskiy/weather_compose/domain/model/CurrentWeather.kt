@@ -13,4 +13,6 @@ data class CurrentWeather(
     val wind: String,
     val pressure: String,
     val location: String,
+    val sunrise: String,
+    val sunset: String,
 )

@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,10 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -123,39 +120,43 @@ fun WeatherHeader(data: CurrentWeather) {
     }
 }
 
-
-@Composable
-fun SunriseSunsetContent(sunrise: Long, sunset: Long, current: Long) {
-    Canvas(modifier = Modifier
-        .fillMaxWidth()
-        .padding(bottom = 112.dp), onDraw = {
-        drawArc(
-            OnCardTextSecondary,
-            -9.5f,
-            -160f,
-            false,
-            size = Size(size.width, 460f),
-            style = Stroke(width = 2.dp.toPx())
-        )
-    })
-}
-
 @Composable
 fun WeatherDetails(weather: CurrentWeather) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight(),
+            .fillMaxSize()
+            .padding(vertical = 24.dp, horizontal = 28.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Column {
-            WeatherDetailsItem(title = stringResource(id = R.string.clouds), description = weather.clouds)
-            WeatherDetailsItem(title = stringResource(id = R.string.pressure), description = weather.pressure)
+            WeatherDetailsItem(
+                title = stringResource(id = R.string.sunrise),
+                description = weather.sunrise
+            )
+
+            WeatherDetailsItem(
+                title = stringResource(id = R.string.clouds),
+                description = weather.clouds
+            )
+            WeatherDetailsItem(
+                title = stringResource(id = R.string.pressure),
+                description = weather.pressure
+            )
         }
 
         Column {
-            WeatherDetailsItem(title = stringResource(id = R.string.humidity), description = weather.humidity)
-            WeatherDetailsItem(title = stringResource(id = R.string.wind), description = weather.wind)
+            WeatherDetailsItem(
+                title = stringResource(id = R.string.sunset),
+                description = weather.sunset
+            )
+            WeatherDetailsItem(
+                title = stringResource(id = R.string.humidity),
+                description = weather.humidity
+            )
+            WeatherDetailsItem(
+                title = stringResource(id = R.string.wind),
+                description = weather.wind
+            )
         }
     }
 }
@@ -169,14 +170,7 @@ fun DetailedWeather(weather: CurrentWeather) {
         backgroundColor = Color.White,
         shape = RoundedCornerShape(topEnd = 24.dp, topStart = 24.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(vertical = 36.dp, horizontal = 36.dp)
-        ) {
-            SunriseSunsetContent(1, 1, 1)
-            WeatherDetails(weather)
-        }
+        WeatherDetails(weather)
     }
 }
 
