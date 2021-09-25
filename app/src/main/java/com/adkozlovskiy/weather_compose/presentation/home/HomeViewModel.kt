@@ -59,6 +59,9 @@ class MainViewModel @Inject constructor(
                 is Resource.Failure -> {
                     _weatherState.value = WeatherState.Failure(resource.failureInfo)
                 }
+                is Resource.Loading -> {
+                    _weatherState.value = WeatherState.Loading
+                }
             }
         }
     }

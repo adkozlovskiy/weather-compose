@@ -22,6 +22,7 @@ class GetCurrentWeatherUseCase @Inject constructor(
 
     operator fun invoke(location: Location): Flow<Resource<CurrentWeather>> = flow {
         try {
+            emit(Resource.Loading)
             val currentWeather =
                 weatherRepository.getCurrentWeather(location.latitude, location.longitude)
                     .toCurrentWeather(mapper, Scales(TemperatureScale.CELSIUS, PressureScale.HPA))
