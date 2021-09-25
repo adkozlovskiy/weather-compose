@@ -20,12 +20,6 @@ fun HomeScreen(
     viewModel: MainViewModel = viewModel()
 ) {
     val weatherState = viewModel.weatherState.collectAsState()
-    val systemUiController = rememberSystemUiController()
-    SideEffect {
-        systemUiController.setStatusBarColor(BackgroundDark)
-        systemUiController.setNavigationBarColor(Color.White)
-    }
-
     when (val state = weatherState.value) {
         is WeatherState.Loading -> LoadingContent()
         is WeatherState.NoLocationPermission -> RequiresPermissions(
